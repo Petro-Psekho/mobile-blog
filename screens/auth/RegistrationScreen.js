@@ -24,12 +24,10 @@ const initialState = {
   password: '',
 };
 
-SplashScreen.preventAutoHideAsync();
-
-export default function App() {
+export default function RegistrationScreen() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
-  const [appIsReady, setAppIsReady] = useState(false);
+
   const [dimension, setDimension] = useState(Dimensions.get('window').width - 16 * 2);
 
   useEffect(() => {
@@ -42,28 +40,6 @@ export default function App() {
     return () => {
       Dimensions.addEventListener('change', onChange);
     };
-  }, []);
-
-  useEffect(() => {
-    async function prepare() {
-      try {
-        // Попередньо завантажте шрифти, зробіть необхідні виклики API тут
-        await Font.loadAsync({
-          'Roboto-400': require('./assets/Roboto-Regular.ttf'),
-          'Roboto-500': require('./assets/Roboto-Medium.ttf'),
-        });
-        // Artificially delay for two seconds to simulate a slow loading
-        // experience. Please remove this if you copy and paste the code!
-        // await new Promise((resolve) => setTimeout(resolve, 2000));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        // Скажіть програмі відрендерити
-        setAppIsReady(true);
-      }
-    }
-
-    prepare();
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
@@ -80,12 +56,8 @@ export default function App() {
     setState(initialState);
   };
 
-  if (!appIsReady) {
-    return null;
-  }
-
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <TouchableWithoutFeedback onPress={keyboardHide}>
         <ImageBackground style={styles.image} source={require('./assets/photo-bg.jpg')}>
           <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
