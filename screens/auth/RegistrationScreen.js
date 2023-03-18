@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
-// import { StatusBar } from 'expo-status-bar';
 import {
   StyleSheet,
   Text,
@@ -15,19 +14,15 @@ import {
   Dimensions,
 } from 'react-native';
 
-import * as SplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
-
 const initialState = {
   login: '',
   email: '',
   password: '',
 };
 
-export default function RegistrationScreen() {
+export default function RegistrationScreen({ navigation }) {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
-
   const [dimension, setDimension] = useState(Dimensions.get('window').width - 16 * 2);
 
   useEffect(() => {
@@ -42,13 +37,6 @@ export default function RegistrationScreen() {
     };
   }, []);
 
-  const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
-      //Це наказує негайно сховати заставку! Якщо ми викличемо цю команду після `setAppIsReady`, ми можемо побачити порожній екран, поки програма завантажує свій початковий стан і рендерить свої перші пікселі. Натомість ми ховаємо заставку, коли знаємо, що кореневе подання вже виконало компонування.
-      await SplashScreen.hideAsync();
-    }
-  }, [appIsReady]);
-
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
@@ -59,7 +47,7 @@ export default function RegistrationScreen() {
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={keyboardHide}>
-        <ImageBackground style={styles.image} source={require('./assets/photo-bg.jpg')}>
+        <ImageBackground style={styles.image} source={require('../../assets/photo-bg.jpg')}>
           <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
             <Text style={styles.title}>Регистрация</Text>
             <View
@@ -106,14 +94,17 @@ export default function RegistrationScreen() {
                 <Text style={styles.btnTitle}>Зарегистрироваться</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity activeOpacity={0.8} style={styles.enterBtn} onPress={keyboardHide}>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.enterBtn}
+                onPress={() => navigation.navigate('Login')}
+              >
                 <Text style={styles.enterBtn}>Уже есть аккаунт? Войти</Text>
               </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
       </TouchableWithoutFeedback>
-      {/* <StatusBar style="auto" /> */}
     </View>
   );
 }
@@ -131,7 +122,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontFamily: 'Roboto-500',
+    // fontFamily: 'Roboto-500',
     fontSize: 30,
     fontWeight: 500,
     color: '#212121',
@@ -139,7 +130,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   input: {
-    fontFamily: 'Roboto-400',
+    // fontFamily: 'Roboto-400',
     borderWidth: 1,
     borderColor: '#E8E8E8',
     height: 50,
@@ -164,7 +155,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   btnTitle: {
-    fontFamily: 'Roboto-400',
+    // fontFamily: 'Roboto-400',
     textAlign: 'center',
     fontSize: 16,
     color: '#fff',
@@ -172,7 +163,7 @@ const styles = StyleSheet.create({
   enterBtn: {
     marginTop: 16,
     textAlign: 'center',
-    fontFamily: 'Roboto-500',
+    // fontFamily: 'Roboto-500',
     fontSize: 16,
     color: '#0000ff',
   },

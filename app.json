@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "myMobileBlog",
-    "slug": "myMobileBlog",
+    "name": "mobile-blog",
+    "slug": "mobile-blog",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
