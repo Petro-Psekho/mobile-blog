@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 import RegistrationScreen from './screens/auth/RegistrationScreen';
 import LoginScreen from './screens/auth/LoginScreen';
@@ -26,10 +27,34 @@ export const useRoute = isAuth => {
     );
   }
   return (
-    <MainTab.Navigator>
-      <MainTab.Screen name="Posts" component={PostsScreen} />
-      <MainTab.Screen name="CreatePosts" component={CreatePostsScreen} />
-      <MainTab.Screen name="Profile" component={ProfileScreen} />
+    <MainTab.Navigator screenOptions={{ tabBarShowLabel: false, tabBarActiveTintColor: '#FF6C00' }}>
+      <MainTab.Screen
+        options={{
+          tabBarIcon: ({ color, size }) => {
+            return <Ionicons name="ios-grid-outline" size={30} color={color} />;
+          },
+        }}
+        name="Posts"
+        component={PostsScreen}
+      />
+      <MainTab.Screen
+        options={{
+          tabBarIcon: ({ color, size }) => {
+            return <Ionicons name="ios-add" size={30} color={color} />;
+          },
+        }}
+        name="CreatePosts"
+        component={CreatePostsScreen}
+      />
+      <MainTab.Screen
+        options={{
+          tabBarIcon: ({ color, size }) => {
+            return <Ionicons name="ios-person-outline" size={30} color={color} />;
+          },
+        }}
+        name="Profile"
+        component={ProfileScreen}
+      />
     </MainTab.Navigator>
   );
 };
