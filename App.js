@@ -5,18 +5,15 @@ import * as Font from 'expo-font';
 import { View, Text, StyleSheet } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import RegistrationScreen from './screens/auth/RegistrationScreen';
-import LoginScreen from './screens/auth/LoginScreen';
+import { useRoute } from './router';
 
 // SplashScreen.preventAutoHideAsync();
-const AuthStack = createStackNavigator();
-const MainTab = createBottomTabNavigator();
 
 export default function App() {
   // const [appIsReady, setAppIsReady] = useState(false);
+
+  const routing = useRoute({});
 
   // useEffect(() => {
   //   async function prepare() {
@@ -45,18 +42,7 @@ export default function App() {
   //   return null;
   // }
 
-  return (
-    <NavigationContainer>
-      <AuthStack.Navigator>
-        <AuthStack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
-        <AuthStack.Screen
-          options={{ headerShown: false }}
-          name="Registration"
-          component={RegistrationScreen}
-        />
-      </AuthStack.Navigator>
-    </NavigationContainer>
-  );
+  return <NavigationContainer>{routing}</NavigationContainer>;
 }
 
 const styles = StyleSheet.create({
