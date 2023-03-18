@@ -27,7 +27,13 @@ export const useRoute = isAuth => {
     );
   }
   return (
-    <MainTab.Navigator screenOptions={{ tabBarShowLabel: false, tabBarActiveTintColor: '#FF6C00' }}>
+    <MainTab.Navigator
+      screenOptions={{
+        tabBarShowLabel: false,
+        headerShown: false,
+        tabBarActiveTintColor: '#FF6C00',
+      }}
+    >
       <MainTab.Screen
         options={{
           tabBarIcon: ({ color, size }) => {
