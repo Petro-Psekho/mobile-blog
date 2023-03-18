@@ -3,14 +3,17 @@ import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 
 import { View, Text, StyleSheet } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import RegistrationScreen from './screens/auth/RegistrationScreen';
 import LoginScreen from './screens/auth/LoginScreen';
 
 // SplashScreen.preventAutoHideAsync();
 const AuthStack = createStackNavigator();
+const MainTab = createBottomTabNavigator();
 
 export default function App() {
   // const [appIsReady, setAppIsReady] = useState(false);
@@ -65,4 +68,4 @@ const styles = StyleSheet.create({
   },
 });
 
-//  <View style={styles.container} onLayout={onLayoutRootView}></View>
+//  <View  onLayout={onLayoutRootView}></View>
