@@ -31,7 +31,7 @@ export const useRoute = isAuth => {
       <MainTab.Screen
         options={{
           tabBarIcon: ({ color, size }) => {
-            return <Ionicons name="ios-grid-outline" size={30} color={color} />;
+            return <Ionicons name="ios-grid-outline" size={25} color={color} />;
           },
         }}
         name="Posts"
@@ -40,7 +40,7 @@ export const useRoute = isAuth => {
       <MainTab.Screen
         options={{
           tabBarIcon: ({ color, size }) => {
-            return <Ionicons name="ios-add" size={30} color={color} />;
+            return <Ionicons name="ios-add-circle-outline" size={35} color={color} />;
           },
         }}
         name="CreatePosts"
@@ -49,7 +49,7 @@ export const useRoute = isAuth => {
       <MainTab.Screen
         options={{
           tabBarIcon: ({ color, size }) => {
-            return <Ionicons name="ios-person-outline" size={30} color={color} />;
+            return <Ionicons name="ios-person-outline" size={25} color={color} />;
           },
         }}
         name="Profile"
