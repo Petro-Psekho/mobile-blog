@@ -4,7 +4,7 @@ import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import Button from '../../components/Button';
 
-const CreatePostsScreen = () => {
+const CreatePostsScreen = ({ navigation }) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -36,7 +36,20 @@ const CreatePostsScreen = () => {
     if (image) {
       try {
         await MediaLibrary.createAssetAsync(image);
-        alert('Picture save!');
+        alert('Picture saved!');
+        setImage(null);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const sendImage = () => {
+    if (image) {
+      try {
+        console.log('navigation', navigation);
+        // alert('Picture sended!');
+        navigation.navigate('Posts', { image });
         setImage(null);
       } catch (error) {
         console.log(error);
@@ -89,10 +102,11 @@ const CreatePostsScreen = () => {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              paddingHorizontal: 50,
+              paddingHorizontal: 30,
             }}
           >
             <Button title={'Re-take'} icon="ios-refresh" onPress={() => setImage(null)} />
+            <Button title={'Send'} icon="ios-arrow-redo-outline" onPress={sendImage} />
             <Button title={'Save'} icon="ios-checkmark-sharp" onPress={saveImage} />
           </View>
         ) : (
