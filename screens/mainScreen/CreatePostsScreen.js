@@ -1,20 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
+import * as MediaLibrary from 'expo-media-library';
+import Button from '../../components/Button';
 
 const CreatePostsScreen = () => {
-  const [click, setClick] = useState(null);
+  const [hasCameraPermission, setHasCameraPermission] = useState(null);
+  const [image, setImage] = useState(null);
+  const [type, setType] = useState(Camera.Constants.Type.back);
+  const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
+  const cameraRef = useRef(null);
 
-  const takePhoto = async () => {
-    console.log(click);
+  useEffect(() => {
+    (async () => {
+      MediaLibrary.requestPermissionsAsync();
+      const cameraStatus = await Camera.requestCameraPermissionsAsync();
+      setHasCameraPermission(cameraStatus.status === 'granted');
+    })();
+  }, []);
+
+  const takePicture = async () => {
+    if (cameraRef) {
+      try {
+        const data = await cameraRef.current.takePictureAsync();
+        console.log(data);
+        console.log(data.uri);
+        setImage(data.uri);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
+
+  if (hasCameraPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
 
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} ref={setClick}>
-        <TouchableOpacity style={styles.snapContainer} onPress={takePhoto}>
-          <Text style={styles.snap}>CLICK</Text>
-        </TouchableOpacity>
+      <Camera style={styles.camera} type={type} flashMode={flash} ref={cameraRef}>
+        <Button title={'Take a picture'} icon="camera" onPress={takePicture} />
       </Camera>
     </View>
   );
@@ -30,20 +55,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
     alignItems: 'center',
     justifyContent: 'flex-end',
-  },
-  snapContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    // marginTop: 220,
-    marginBottom: 20,
-    width: 60,
-    height: 60,
-    borderWidth: 1,
-    borderRadius: 50,
-    borderColor: '#fff',
-  },
-  snap: {
-    color: '#fff',
+    paddingBottom: 25,
   },
 });
 
