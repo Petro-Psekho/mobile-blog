@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 
 const PostsScreen = ({ route }) => {
   const [posts, setPosts] = useState([]);
@@ -16,7 +16,16 @@ const PostsScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Text>PostsScreen Screen</Text>
+      <FlatList
+        style={{ marginTop: 50 }}
+        data={posts}
+        keyExtractor={(item, indx) => indx.toString()}
+        renderItem={({ item }) => (
+          <View style={{ marginBottom: 20 }}>
+            <Image source={{ uri: item.image }} style={{ marginHorizontal: 10, height: 200 }} />
+          </View>
+        )}
+      />
     </View>
   );
 };
@@ -24,7 +33,7 @@ const PostsScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    // alignItems: 'center',
     justifyContent: 'center',
   },
 });
