@@ -5,8 +5,11 @@ import * as Font from "expo-font";
 import { View, Text, StyleSheet } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
+import { Provider } from "react-redux";
 
-import { useRoute } from "./components/router";
+import store from "./redux/store";
+
+import { useRoute } from "./router";
 
 // SplashScreen.preventAutoHideAsync();
 
@@ -42,7 +45,11 @@ export default function App() {
   //   return null;
   // }
 
-  return <NavigationContainer>{routing}</NavigationContainer>;
+  return (
+    <Provider store={store}>
+      <NavigationContainer>{routing}</NavigationContainer>
+    </Provider>
+  );
 }
 
 const styles = StyleSheet.create({
