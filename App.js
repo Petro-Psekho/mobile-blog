@@ -1,22 +1,22 @@
-import React, { useState, useEffect, useCallback } from "react";
-import * as SplashScreen from "expo-splash-screen";
-import * as Font from "expo-font";
+import React, { useState, useEffect, useCallback } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
+import * as Font from 'expo-font';
 
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from 'react-native';
 
-import { NavigationContainer } from "@react-navigation/native";
-import { Provider } from "react-redux";
+import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from 'react-redux';
 
-import store from "./redux/store";
+import store from './redux/store';
 
-import { useRoute } from "./router";
+import { useRoute } from './router';
 
 // SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   // const [appIsReady, setAppIsReady] = useState(false);
 
-  const routing = useRoute({});
+  const routing = useRoute(false);
 
   // useEffect(() => {
   //   async function prepare() {
@@ -55,9 +55,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
