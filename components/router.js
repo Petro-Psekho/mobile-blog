@@ -1,23 +1,27 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
-import RegistrationScreen from './screens/auth/RegistrationScreen';
-import LoginScreen from './screens/auth/LoginScreen';
+import RegistrationScreen from "../screens/auth/RegistrationScreen";
+import LoginScreen from "../screens/auth/LoginScreen";
 
-import PostsScreen from './screens/mainScreen/PostsScreen';
-import CreatePostsScreen from './screens/mainScreen/CreatePostsScreen';
-import ProfileScreen from './screens/mainScreen/ProfileScreen';
+import PostsScreen from "../screens/mainScreen/PostsScreen";
+import CreatePostsScreen from "../screens/mainScreen/CreatePostsScreen";
+import ProfileScreen from "../screens/mainScreen/ProfileScreen";
 
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
-export const useRoute = isAuth => {
+export const useRoute = (isAuth) => {
   if (!isAuth) {
     return (
       <AuthStack.Navigator>
-        <AuthStack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
+        <AuthStack.Screen
+          options={{ headerShown: false }}
+          name="Login"
+          component={LoginScreen}
+        />
         <AuthStack.Screen
           options={{ headerShown: false }}
           name="Registration"
@@ -31,7 +35,7 @@ export const useRoute = isAuth => {
       screenOptions={{
         tabBarShowLabel: false,
         headerShown: false,
-        tabBarActiveTintColor: '#FF6C00',
+        tabBarActiveTintColor: "#FF6C00",
       }}
     >
       <MainTab.Screen
@@ -46,7 +50,9 @@ export const useRoute = isAuth => {
       <MainTab.Screen
         options={{
           tabBarIcon: ({ color, size }) => {
-            return <Ionicons name="ios-add-circle-outline" size={35} color={color} />;
+            return (
+              <Ionicons name="ios-add-circle-outline" size={35} color={color} />
+            );
           },
         }}
         name="CreatePosts"
@@ -55,7 +61,9 @@ export const useRoute = isAuth => {
       <MainTab.Screen
         options={{
           tabBarIcon: ({ color, size }) => {
-            return <Ionicons name="ios-person-outline" size={25} color={color} />;
+            return (
+              <Ionicons name="ios-person-outline" size={25} color={color} />
+            );
           },
         }}
         name="Profile"

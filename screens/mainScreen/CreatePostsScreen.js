@@ -55,7 +55,7 @@ const CreatePostsScreen = ({ navigation }) => {
       try {
         console.log("navigation", navigation);
         // alert('Picture sended!');
-        navigation.navigate("Posts", { image });
+        navigation.navigate("DefaultScreen", { image });
         setImage(null);
       } catch (error) {
         console.log(error);

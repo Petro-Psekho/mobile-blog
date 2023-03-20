@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import * as SplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
+import React, { useState, useEffect, useCallback } from "react";
+import * as SplashScreen from "expo-splash-screen";
+import * as Font from "expo-font";
 
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from "react-native";
 
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from "@react-navigation/native";
 
-import { useRoute } from './router';
+import { useRoute } from "./components/router";
 
 // SplashScreen.preventAutoHideAsync();
 
@@ -48,9 +48,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
