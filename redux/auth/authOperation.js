@@ -1,22 +1,20 @@
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+// import { db, auth } from '../../firebase/config';
+
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 export const authSignUpUser =
   ({ email, password, login }) =>
   async (dispatch, getState) => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(userCredential => {
         // Signed in
         const user = userCredential.user;
         // ...
-        console.log("auth ----->", auth);
-        console.log("user ----->", user);
+        console.log('auth ----->', auth);
+        console.log('user ----->', user);
       })
-      .catch((error) => {
+      .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode);
@@ -28,14 +26,14 @@ export const authSignInUser =
   async (dispatch, getState) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(userCredential => {
         // Signed in
         const user = userCredential.user;
         // ...
-        console.log("auth2 ----->", auth);
-        console.log("user2 ----->", user);
+        console.log('auth2 ----->', auth);
+        console.log('user2 ----->', user);
       })
-      .catch((error) => {
+      .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode);
