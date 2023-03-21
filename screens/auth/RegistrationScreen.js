@@ -53,9 +53,14 @@ export default function RegistrationScreen({ navigation }) {
     setState(initialState);
   };
 
+  const keyboardHide = () => {
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={handleSubmit}>
+      <TouchableWithoutFeedback onPress={keyboardHide}>
         <ImageBackground
           style={styles.image}
           source={require("../../assets/photo-bg.jpg")}
