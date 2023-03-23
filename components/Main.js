@@ -1,31 +1,29 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from 'react';
 
-import {} from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import { NavigationContainer } from "@react-navigation/native";
+import {} from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
 
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useRoute } from "../router";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useRoute } from '../router';
+
+import { authStateChangeUser } from '../redux/auth/authOperation';
 
 // import { app, db, auth } from "../firebase/config";
 
 const Main = () => {
-  const [user, setUser] = useState(null);
+  const state = useSelector(state => state);
 
-  const state = useSelector((state) => state);
+  dispatch = useDispatch();
 
-  // console.log("Main state>>>>>>>>>>>>", state.auth);
+  console.log('Main state>>>>>>>>>>>>', state);
+  console.log('Main state.auth>>>>>>>>>>>>', state.auth.userId);
 
-  const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUser(user);
-      const uid = user.uid;
-    } else {
-      // User is signed out
-    }
-  });
-  const routing = useRoute(user);
+  useEffect(() => {
+    dispatch(authStateChangeUser());
+  }, []);
+
+  const routing = useRoute(state.auth.userId);
   useEffect(() => {}, []);
   return <NavigationContainer>{routing}</NavigationContainer>;
 };

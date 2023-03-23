@@ -46,7 +46,7 @@ export default function RegistrationScreen({ navigation }) {
   const handleSubmit = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(state);
+
     dispatch(authSignUpUser(state));
     setState(initialState);
   };
