@@ -3,10 +3,13 @@ import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth';
 import { authSlice } from './authReducer';
 
 import { app, db } from '../../firebase/config';
+
+const { updateUserProfile, authStateChange, authSignOut } = authSlice.actions;
 
 export const authSignUpUser =
   ({ email, password, login }) =>
@@ -20,7 +23,7 @@ export const authSignUpUser =
         console.log('auth.CurrentUser >>>>>>', auth.currentUser);
 
         dispatch(
-          authSlice.actions.updateUserProfile({
+          updateUserProfile({
             userId: user.uid,
             login: login,
           })
@@ -50,19 +53,30 @@ export const authSignInUser =
         console.log(errorMessage);
       });
   };
-export const authSignOutUser = () => async (dispatch, getState) => {};
+export const authSignOutUser = () => async (dispatch, getState) => {
+  const auth = getAuth();
+  signOut(auth)
+    .then(() => {
+      // Sign-out successful.
+      dispatch(authSignOut());
+    })
+    .catch(error => {
+      // An error happened.
+    });
+};
 
 export const authStateChangeUser = () => async (dispatch, getState) => {
   const auth = getAuth();
   onAuthStateChanged(auth, user => {
     if (user) {
       const uid = user.uid;
+      console.log('user', user);
 
       const userUdateProfile = {
         userId: uid,
       };
-      dispatch(authSlice.actions.updateUserProfile(userUdateProfile));
-      // dispatch(authSlice.actions.authStateChange({ stateChange: true }));
+      dispatch(updateUserProfile(userUdateProfile));
+      dispatch(authStateChange({ stateChange: true }));
     } else {
       // User is signed out
     }

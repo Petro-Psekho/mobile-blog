@@ -12,18 +12,20 @@ import { authStateChangeUser } from '../redux/auth/authOperation';
 // import { app, db, auth } from "../firebase/config";
 
 const Main = () => {
-  const state = useSelector(state => state);
+  // const state = useSelector(state => state);
+  const { stateChange } = useSelector(state => state.auth);
 
-  dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  console.log('Main state>>>>>>>>>>>>', state);
-  console.log('Main state.auth>>>>>>>>>>>>', state.auth.userId);
+  // console.log('Main state>>>>>>>>>>>>', state);
+  // console.log('Main state.auth>>>>>>>>>>>>', state.auth.userId);
+  console.log('Main stateChange>>>>>>>>>>>>', stateChange);
 
   useEffect(() => {
     dispatch(authStateChangeUser());
   }, []);
 
-  const routing = useRoute(state.auth.userId);
+  const routing = useRoute(stateChange);
 
   return <NavigationContainer>{routing}</NavigationContainer>;
 };
