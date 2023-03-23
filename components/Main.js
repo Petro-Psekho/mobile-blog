@@ -24,7 +24,7 @@ const Main = () => {
   }, []);
 
   const routing = useRoute(state.auth.userId);
-  useEffect(() => {}, []);
+
   return <NavigationContainer>{routing}</NavigationContainer>;
 };
 
